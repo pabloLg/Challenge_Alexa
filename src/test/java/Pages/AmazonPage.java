@@ -1,6 +1,5 @@
 package Pages;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import java.util.List;
+import org.openqa.selenium.NoSuchElementException;
 
 public class AmazonPage extends BasePage {
 
@@ -26,6 +26,9 @@ public class AmazonPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//*[@id='search']/div[1]/div[2]/div/span[3]/div[2]/div/div/span/div/div")
     public WebElement thirdElement;
 
+    @FindBy(how = How.XPATH, using = "//*[@id='add-to-cart-button']")
+    public WebElement addToCart;
+
 
     public void Search(String alexa) {
         inputSearch.sendKeys(alexa);
@@ -38,6 +41,18 @@ public class AmazonPage extends BasePage {
 
     public void SelectThirdItem() {
         List<WebElement> list = driver.findElements(By.xpath(searchItems));
-        list.get(3).click();
+        list.get(2).click();
+    }
+
+    public boolean VerifyItemPurchase() {
+
+        try{
+            addToCart.click();
+            return true;
+        }
+        catch (NoSuchElementException e )
+        {
+            return false;
+        }
     }
 }

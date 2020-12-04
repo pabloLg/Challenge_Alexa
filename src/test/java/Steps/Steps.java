@@ -2,11 +2,14 @@ package Steps;
 
 import Pages.AmazonPage;
 
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import static org.junit.Assert.assertTrue;
 
 public class Steps {
 
@@ -20,6 +23,7 @@ public class Steps {
 
         try{
             System.setProperty("webdriver.chrome.driver", "C:\\Users\\Outlet\\Documents\\Alexa_challenge\\src\\main\\resources\\chromedriver.exe");
+
             ChromeOptions options = new ChromeOptions();
             options.addArguments("start-maximized");
             driver = new ChromeDriver(options);
@@ -49,5 +53,11 @@ public class Steps {
 
     @Then("the item is available for purchase")
     public void theItemIsAvailableForPurchase() {
+        assertTrue("Item is not available for pruchase", amazonPage.VerifyItemPurchase());
+    }
+
+    @After
+    public void closeBrowser(){
+        driver.close();
     }
 }
