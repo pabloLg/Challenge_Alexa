@@ -1,13 +1,12 @@
 package Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 import org.openqa.selenium.NoSuchElementException;
+
 
 public class AmazonPage extends BasePage {
 
@@ -40,7 +39,11 @@ public class AmazonPage extends BasePage {
     }
 
     public void SelectThirdItem() {
-        List<WebElement> list = driver.findElements(By.xpath(searchItems));
+    try{
+        Thread.sleep(5000);
+    }catch(Exception e){    }
+
+        List<WebElement> list = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath(searchItems))));
         list.get(2).click();
     }
 
