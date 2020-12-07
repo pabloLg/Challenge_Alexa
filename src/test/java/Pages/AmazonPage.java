@@ -20,6 +20,7 @@ public class AmazonPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//span/div/div/ul/li/a[text()=\"2\"]")
     public WebElement secondPage;
 
+    /* result list xpath*/
     public String searchItems = "//*[@id=\"search\"]/div[1]/div[2]/div/span[3]/div[2]/div/div/span/div/div/div[2]/div[2]/div/div[1]/div/div/div[1]/h2/a/span";
 
     @FindBy(how = How.XPATH, using = "//*[@id='search']/div[1]/div[2]/div/span[3]/div[2]/div/div/span/div/div")
@@ -39,12 +40,14 @@ public class AmazonPage extends BasePage {
     }
 
     public void SelectThirdItem() {
+    //  wait for the page loads
     try{
         Thread.sleep(5000);
     }catch(Exception e){    }
 
-        List<WebElement> list = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath(searchItems))));
-        list.get(2).click();
+    List<WebElement> list = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath(searchItems))));
+    // click in the third item not count sponsored items
+    list.get(2).click();
     }
 
     public boolean VerifyItemPurchase() {
